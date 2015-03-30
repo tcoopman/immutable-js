@@ -70,7 +70,7 @@ export class Set extends SetCollection {
     if (iters.length === 0) {
       return this;
     }
-    if (this.size === 0 && iters.length === 1) {
+    if (this.size === 0 && !this.__ownerID && iters.length === 1) {
       return this.constructor(iters[0]);
     }
     return this.withMutations(set => {
@@ -88,7 +88,7 @@ export class Set extends SetCollection {
     var originalSet = this;
     return this.withMutations(set => {
       originalSet.forEach(value => {
-        if (!iters.every(iter => iter.contains(value))) {
+        if (!iters.every(iter => iter.includes(value))) {
           set.remove(value);
         }
       });
@@ -103,7 +103,7 @@ export class Set extends SetCollection {
     var originalSet = this;
     return this.withMutations(set => {
       originalSet.forEach(value => {
-        if (iters.some(iter => iter.contains(value))) {
+        if (iters.some(iter => iter.includes(value))) {
           set.remove(value);
         }
       });

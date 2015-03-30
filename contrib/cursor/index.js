@@ -88,9 +88,10 @@ KeyedCursorPrototype.set = function(key, value) {
   return updateCursor(this, function (m) { return m.set(key, value); }, [key]);
 }
 
-IndexedCursorPrototype.push = function(...values) {
+IndexedCursorPrototype.push = function(/* values */) {
+  var args = arguments;
   return updateCursor(this, function (m) {
-    return m.push.apply(m, values);
+    return m.push.apply(m, args);
   });
 }
 
@@ -100,9 +101,10 @@ IndexedCursorPrototype.pop = function() {
   });
 }
 
-IndexedCursorPrototype.unshift = function(...values) {
+IndexedCursorPrototype.unshift = function(/* values */) {
+  var args = arguments;
   return updateCursor(this, function (m) {
-    return m.unshift.apply(m, values);
+    return m.unshift.apply(m, args);
   });
 }
 
